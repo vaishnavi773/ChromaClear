@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChromaClear — AI Image Colorization & Restoration</title>
+  <meta name="description" content="Transform black & white photographs into vivid colour with AI-powered colorization and super-resolution.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="bg-layer">
+    <div class="grain"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <a class="logo" href="/"><span class="logo-chrome">Chroma</span><span class="logo-clear">Clear</span></a>
+    <div class="nav-links">
+      <a href="/" class="nav-link active">Home</a>
+      <a href="/studio" class="nav-link">Studio</a>
+      <a href="/how-it-works" class="nav-link">How It Works</a>
+    </div>
+    <div class="nav-right">
+      <a href="/studio" class="btn-nav-cta">Open Studio →</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-eyebrow">AI-Powered Image Restoration</div>
+    <h1 class="hero-title">Colour<br/>the&nbsp;<span class="accent-word">Invisible</span></h1>
+    <p class="hero-sub">Transform black &amp; white photographs into vivid, lifelike colour. Push further with super-resolution and noise reduction — bringing history back to life.</p>
+    <div class="hero-ctas">
+      <a href="/studio" class="btn-hero-primary">
+        Start Colorizing
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="/how-it-works" class="btn-hero-secondary">How It Works</a>
+    </div>
+    <div class="hero-badges">
+      <span class="badge"><span class="badge-icon">◈</span> Deep Colorization</span>
+      <span class="badge"><span class="badge-icon">◈</span> Super-Resolution</span>
+      <span class="badge"><span class="badge-icon">◈</span> Noise Reduction</span>
+      <span class="badge"><span class="badge-icon">◈</span> Live Adjustments</span>
+      <span class="badge"><span class="badge-icon">◈</span> Before / After Slider</span>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num" data-count="3">0</span>
+        <span class="stat-label">Pipeline Steps</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-count="6">0</span>
+        <span class="stat-label">File Formats</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-count="3" data-suffix="×">0×</span>
+        <span class="stat-label">Max Upscale</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-count="16" data-suffix="MB">0MB</span>
+        <span class="stat-label">Max File Size</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Feature Cards -->
+  <section class="home-features">
+    <div class="home-features-grid">
+      <div class="home-feat-card reveal">
+        <div class="hfc-glow"></div>
+        <div class="hfc-icon">🎨</div>
+        <h3>Neural Colorization</h3>
+        <p>Zhang et al. (2016) deep network predicts realistic CIELAB colour — grass is green, skies are blue, skin tones are warm.</p>
+        <a href="/studio" class="hfc-link">Try it →</a>
+      </div>
+      <div class="home-feat-card reveal" style="--delay:.1s">
+        <div class="hfc-glow" style="--glow-col:rgba(124,58,237,.12)"></div>
+        <div class="hfc-icon">🔬</div>
+        <h3>Super-Resolution</h3>
+        <p>Lanczos upsampling paired with unsharp masking restores micro-detail lost to age, compression or poor scanning.</p>
+        <a href="/studio" class="hfc-link">Try it →</a>
+      </div>
+      <div class="home-feat-card reveal" style="--delay:.2s">
+        <div class="hfc-glow" style="--glow-col:rgba(240,35,110,.1)"></div>
+        <div class="hfc-icon">✨</div>
+        <h3>Noise Reduction</h3>
+        <p>Bilateral filtering suppresses film grain and digital noise while faithfully preserving every edge and fine detail.</p>
+        <a href="/studio" class="hfc-link">Try it →</a>
+      </div>
+      <div class="home-feat-card reveal" style="--delay:.3s">
+        <div class="hfc-glow" style="--glow-col:rgba(245,158,11,.08)"></div>
+        <div class="hfc-icon">🎛️</div>
+        <h3>Live Adjustments</h3>
+        <p>Real-time sliders for brightness, contrast, saturation, warmth, sharpness &amp; vignette — tweak without re-processing.</p>
+        <a href="/studio" class="hfc-link">Try it →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Steps Teaser -->
+  <section class="home-steps-teaser">
+    <div class="home-steps-inner">
+      <div class="home-steps-text reveal">
+        <div class="feat-tag">Simple Process</div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin-bottom:1rem;">Four steps.<br/>Stunning results.</h2>
+        <p style="color:var(--text2);font-size:.92rem;line-height:1.75;margin-bottom:1.5rem;">Upload any greyscale photograph, choose your pipeline, hit process, and fine-tune — all in your browser in seconds.</p>
+        <a href="/how-it-works" class="hfc-link">Read the full breakdown →</a>
+      </div>
+      <div class="home-steps-list reveal" style="--delay:.15s">
+        <div class="home-step-row">
+          <span class="home-step-num">01</span>
+          <div><strong>Upload</strong><p>Drop, browse or paste — PNG, JPG, WEBP, TIFF up to 16 MB.</p></div>
+        </div>
+        <div class="home-step-row">
+          <span class="home-step-num">02</span>
+          <div><strong>Colorize</strong><p>Neural network assigns photorealistic hues based on scene context.</p></div>
+        </div>
+        <div class="home-step-row">
+          <span class="home-step-num">03</span>
+          <div><strong>Enhance</strong><p>Denoise, upscale and sharpen for modern-quality output.</p></div>
+        </div>
+        <div class="home-step-row">
+          <span class="home-step-num">04</span>
+          <div><strong>Download</strong><p>Compare before &amp; after, fine-tune, and export in full quality.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner reveal">
+    <div class="cta-banner-inner">
+      <div class="cta-glow"></div>
+      <h2>Ready to restore your photographs?</h2>
+      <p>No sign-up. No cloud upload. Processing runs entirely on your local server.</p>
+      <a href="/studio" class="btn-hero-primary">
+        Open the Studio
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo"><span class="logo-chrome">Chroma</span><span class="logo-clear">Clear</span></div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/studio">Studio</a>
+      <a href="/how-it-works">How It Works</a>
+    </div>
+    <p>Powered by OpenCV · Pillow · Flask · Zhang et al. Colorization</p>
+    <p class="footer-note">All processing happens locally on your server. No images stored permanently.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="/static/js/home.js"></script>
+</body>
+</html>

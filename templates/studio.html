@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChromaClear Studio — Colorize & Restore</title>
+  <meta name="description" content="AI-powered image colorization and restoration studio. Upload, process and download restored photographs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="bg-layer">
+    <div class="grain"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <a class="logo" href="/"><span class="logo-chrome">Chroma</span><span class="logo-clear">Clear</span></a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/studio" class="nav-link active">Studio</a>
+      <a href="/how-it-works" class="nav-link">How It Works</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-kbd" id="shortcutsHint" title="Show keyboard shortcuts">
+        <span>⌘</span> Shortcuts
+      </div>
+      <div class="nav-pill" id="modelPill">
+        <span class="pill-dot" id="pillDot"></span>
+        <span class="pill-text" id="pillText">Checking…</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="page-header-inner">
+      <div class="page-header-text">
+        <div class="hero-eyebrow">Processing Studio</div>
+        <h1 class="page-title">Restore &amp; <span class="accent-word">Colorize</span></h1>
+        <p class="page-subtitle">Upload a photograph, choose your pipeline, and let the AI work. Fine-tune with live adjustments before downloading.</p>
+      </div>
+      <div class="page-header-tips">
+        <div class="tip-item"><span class="tip-icon">💡</span> Drag &amp; drop or paste with <kbd>Ctrl+V</kbd></div>
+        <div class="tip-item"><span class="tip-icon">⚡</span> Use <strong>Full Pipeline</strong> for best results</div>
+        <div class="tip-item"><span class="tip-icon">🎛️</span> Enable <strong>Live Adjust</strong> to fine-tune</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main App -->
+  <main class="app-wrap">
+
+    <!-- Mode selector -->
+    <div class="mode-selector">
+      <button class="mode-btn active" data-mode="colorize">
+        <span class="mode-icon">🎨</span><span>Colorize Only</span>
+      </button>
+      <button class="mode-btn" data-mode="enhance">
+        <span class="mode-icon">✨</span><span>Enhance Only</span>
+      </button>
+      <button class="mode-btn" data-mode="both">
+        <span class="mode-icon">🚀</span><span>Full Pipeline</span>
+        <span class="mode-badge">BEST</span>
+      </button>
+    </div>
+
+    <!-- Upload zone -->
+    <div class="upload-area" id="uploadArea">
+      <input type="file" id="fileInput" accept="image/*" hidden />
+      <div class="upload-content" id="uploadContent">
+        <div class="upload-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <circle cx="28" cy="28" r="27" stroke="url(#grad1)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <path d="M28 18v14M22 24l6-6 6 6" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 38h20" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="grad1" x1="10" y1="10" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00e5c7"/><stop offset="1" stop-color="#f0236e"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <p class="upload-title">Drop your photograph here</p>
+        <p class="upload-hint">PNG · JPG · WEBP · BMP · TIFF — up to 16 MB</p>
+        <button class="btn-upload" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+        <p class="upload-paste-hint">or paste with <kbd>Ctrl+V</kbd> / <kbd>⌘V</kbd></p>
+      </div>
+    </div>
+
+    <!-- Options bar -->
+    <div class="options-bar" id="optionsBar">
+      <label class="opt-toggle" id="enhanceToggle" title="Add auto-enhancement on top of colorization">
+        <input type="checkbox" id="enhanceCheck" />
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+        <span>Auto-Enhance</span>
+      </label>
+      <div class="opt-scale">
+        <span>Scale</span>
+        <div class="scale-btns">
+          <button class="scale-btn active" data-scale="1">1×</button>
+          <button class="scale-btn" data-scale="2">2×</button>
+          <button class="scale-btn" data-scale="3">3×</button>
+        </div>
+      </div>
+      <label class="opt-toggle" id="adjToggle" title="Open live adjustment panel">
+        <input type="checkbox" id="adjCheck" />
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+        <span>Live Adjust</span>
+      </label>
+      <button class="btn-process" id="processBtn" disabled>
+        <span class="btn-text">Process Image</span>
+        <span class="btn-arrow">→</span>
+      </button>
+    </div>
+
+    <!-- Live Adjustments Panel -->
+    <div class="adj-panel" id="adjPanel">
+      <div class="adj-title">Live Adjustments — Applied after processing</div>
+      <div class="adj-sliders">
+        <div class="adj-row">
+          <div class="adj-label">Brightness <span id="brightnessVal">100%</span></div>
+          <input type="range" class="adj-slider" id="adjBrightness" min="50" max="200" value="100" />
+        </div>
+        <div class="adj-row">
+          <div class="adj-label">Contrast <span id="contrastVal">100%</span></div>
+          <input type="range" class="adj-slider" id="adjContrast" min="50" max="200" value="100" />
+        </div>
+        <div class="adj-row">
+          <div class="adj-label">Saturation <span id="saturationVal">100%</span></div>
+          <input type="range" class="adj-slider" id="adjSaturation" min="0" max="250" value="100" />
+        </div>
+        <div class="adj-row">
+          <div class="adj-label">Warmth <span id="warmthVal">+0</span></div>
+          <input type="range" class="adj-slider" id="adjWarmth" min="-50" max="50" value="0" />
+        </div>
+        <div class="adj-row">
+          <div class="adj-label">Sharpness <span id="sharpnessVal">0px</span></div>
+          <input type="range" class="adj-slider" id="adjSharpness" min="0" max="5" value="0" step="0.5" />
+        </div>
+        <div class="adj-row">
+          <div class="adj-label">Vignette <span id="vignetteVal">0%</span></div>
+          <input type="range" class="adj-slider" id="adjVignette" min="0" max="100" value="0" />
+        </div>
+      </div>
+      <button class="adj-reset-btn" id="adjResetBtn">↺ Reset Adjustments</button>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-bar-wrap" id="progressWrap">
+      <div class="progress-steps" id="progressSteps">
+        <div class="prog-step" id="progUpload"><span class="prog-dot"></span> Uploading</div>
+        <div class="prog-step" id="progColorize"><span class="prog-dot"></span> Colorizing</div>
+        <div class="prog-step" id="progEnhance"><span class="prog-dot"></span> Enhancing</div>
+        <div class="prog-step" id="progFinalize"><span class="prog-dot"></span> Finalizing</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <!-- Preview area -->
+    <div class="preview-wrap" id="previewWrap" style="display:none">
+      <div class="preview-panel">
+        <div class="panel-label">
+          Original
+          <span class="panel-info-badge" id="origInfo">—</span>
+        </div>
+        <div class="panel-img-wrap">
+          <img id="originalImg" alt="Original" />
+        </div>
+      </div>
+      <div class="divider-line"><div class="divider-glow"></div></div>
+      <div class="preview-panel">
+        <div class="panel-label result-label">
+          Result
+          <span class="panel-info-badge" id="resultInfo">—</span>
+        </div>
+        <div class="panel-img-wrap">
+          <img id="resultImg" alt="Result" style="display:none" />
+          <div id="resultPlaceholder" class="result-placeholder">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="23" stroke="rgba(0,229,199,0.2)" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <path d="M24 16v10M19 21l5-5 5 5" stroke="rgba(0,229,199,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="24" cy="33" r="2" fill="rgba(0,229,199,0.4)"/>
+            </svg>
+            <span class="placeholder-title">Result will appear here</span>
+            <span class="placeholder-hint">Click <strong>Process Image</strong> to start</span>
+          </div>
+          <div class="processing-overlay" id="processingOverlay">
+            <div class="spinner"></div>
+            <span id="overlayText">Processing…</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compare slider -->
+    <div class="compare-wrap" id="compareWrap" style="display:none">
+      <div class="compare-container" id="compareContainer">
+        <img class="compare-original" id="cmpOriginal" alt="Before" />
+        <img class="compare-result"   id="cmpResult"   alt="After" />
+        <div class="compare-handle" id="compareHandle">
+          <div class="handle-line"></div>
+          <div class="handle-circle">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M7 5l-4 5 4 5M13 5l4 5-4 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="handle-line"></div>
+        </div>
+        <div class="cmp-label cmp-before">BEFORE</div>
+        <div class="cmp-label cmp-after">AFTER</div>
+        <div class="cmp-pct-badge" id="cmpPct">50%</div>
+      </div>
+      <div class="result-actions">
+        <div class="result-meta" id="resultMeta"></div>
+        <div class="result-btns">
+          <button class="btn-secondary" id="resetBtn">↺ New Image</button>
+          <a class="btn-primary" id="downloadBtn" download="chromaclear_result.jpg">↓ Download</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo"><span class="logo-chrome">Chroma</span><span class="logo-clear">Clear</span></div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/studio">Studio</a>
+      <a href="/how-it-works">How It Works</a>
+    </div>
+    <p>Powered by OpenCV · Pillow · Flask · Zhang et al. Colorization</p>
+    <p class="footer-note">All processing happens locally on your server. No images stored permanently.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <div class="shortcuts-toast" id="shortcutsToast">
+    <div class="shortcut-item"><kbd>Ctrl+V</kbd> Paste image</div>
+    <div class="shortcut-item"><kbd>Enter</kbd> Process</div>
+    <div class="shortcut-item"><kbd>Esc</kbd> Reset</div>
+    <div class="shortcut-item"><kbd>← →</kbd> Slider</div>
+    <div class="shortcut-item"><kbd>?</kbd> Shortcuts</div>
+  </div>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

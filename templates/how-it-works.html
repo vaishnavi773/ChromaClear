@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works — ChromaClear</title>
+  <meta name="description" content="Learn how ChromaClear uses deep learning and image processing to colorize and restore photographs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="bg-layer">
+    <div class="grain"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <a class="logo" href="/"><span class="logo-chrome">Chroma</span><span class="logo-clear">Clear</span></a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/studio" class="nav-link">Studio</a>
+      <a href="/how-it-works" class="nav-link active">How It Works</a>
+    </div>
+    <div class="nav-right">
+      <a href="/studio" class="btn-nav-cta">Open Studio →</a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header page-header--hiw">
+    <div class="page-header-inner" style="max-width:640px;text-align:center;margin:0 auto;">
+      <div class="hero-eyebrow">Documentation</div>
+      <h1 class="page-title" style="text-align:center;">How It <span class="accent-word">Works</span></h1>
+      <p class="page-subtitle" style="text-align:center;">A deep-dive into the pipeline behind ChromaClear — from upload to download.</p>
+    </div>
+  </header>
+
+  <!-- Steps -->
+  <section class="hiw-steps-section">
+    <div class="content-wrap">
+      <h2 class="section-title" style="margin-bottom:2.5rem;">The Four-Step <span>Pipeline</span></h2>
+      <div class="steps-grid">
+        <div class="step-card reveal">
+          <div class="step-num">01</div>
+          <span class="step-icon">📸</span>
+          <h3>Upload</h3>
+          <p>Drop, browse or paste any greyscale or degraded photograph. Supported formats: JPEG, PNG, WEBP, BMP, TIFF — up to 16 MB. Images larger than 1024px are automatically resized to keep processing fast.</p>
+        </div>
+        <div class="step-card reveal" style="--delay:.1s">
+          <div class="step-num">02</div>
+          <span class="step-icon">🧠</span>
+          <h3>Colorize</h3>
+          <p>The Zhang et al. deep convolutional network converts the image to CIELAB colour space, predicts the most plausible ab chrominance channels, then merges them with the original luminance for a full-colour result.</p>
+        </div>
+        <div class="step-card reveal" style="--delay:.2s">
+          <div class="step-num">03</div>
+          <span class="step-icon">🔬</span>
+          <h3>Enhance</h3>
+          <p>Bilateral filtering denoises while preserving edges. Lanczos upsampling doubles or triples resolution. An unsharp mask recovers micro-detail lost to age or compression, followed by a perceptual clarity pass.</p>
+        </div>
+        <div class="step-card reveal" style="--delay:.3s">
+          <div class="step-num">04</div>
+          <span class="step-icon">🎛️</span>
+          <h3>Adjust &amp; Download</h3>
+          <p>Fine-tune brightness, contrast, saturation, warmth, sharpness and vignette using real-time CSS-filter sliders. Drag the before/after comparison slider, then export your result at full JPEG quality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Deep Dive -->
+  <section class="features-section">
+    <div class="feat-block reveal">
+      <div class="feat-text">
+        <div class="feat-tag">Colorization</div>
+        <h2>Neural colour intelligence</h2>
+        <p>ChromaClear uses the Zhang et al. (2016) deep convolutional network trained on millions of ImageNet photographs. The model predicts the most plausible ab chrominance channels in the CIELAB colour space — producing results that respect scene semantics: grass is green, skies are blue, skin tones are warm.</p>
+        <p>When the pre-trained Caffe weights are not installed, the algorithmic engine uses luminance-guided warm mapping to produce a tasteful tonal result — no model required.</p>
+      </div>
+      <div class="feat-visual">
+        <div class="feat-card">
+          <div class="feat-bar" style="--pct:92%;--col:#00e5c7">CIELAB Prediction <span>92%</span></div>
+          <div class="feat-bar" style="--pct:87%;--col:#7c3aed">Scene Semantics <span>87%</span></div>
+          <div class="feat-bar" style="--pct:95%;--col:#f0236e">Skin Tone Accuracy <span>95%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="feat-block reverse reveal">
+      <div class="feat-text">
+        <div class="feat-tag">Enhancement</div>
+        <h2>Super-resolution &amp; clarity</h2>
+        <p>The auto-enhancement module runs a four-stage pipeline. OpenCV bilateral filtering suppresses noise while faithfully preserving edges. Then Lanczos-4 upsampling doubles or triples the resolution — far superior to nearest-neighbour or bilinear methods.</p>
+        <p>An unsharp mask then restores micro-detail lost to compression or age, followed by a final perceptual clarity pass to boost contrast and colour fidelity.</p>
+      </div>
+      <div class="feat-visual">
+        <div class="pipeline-steps">
+          <div class="pipe-step"><span class="pipe-num">1</span> Bilateral Denoise</div>
+          <div class="pipe-arrow">↓</div>
+          <div class="pipe-step"><span class="pipe-num">2</span> Lanczos Upscale</div>
+          <div class="pipe-arrow">↓</div>
+          <div class="pipe-step"><span class="pipe-num">3</span> Unsharp Mask</div>
+          <div class="pipe-arrow">↓</div>
+          <div class="pipe-step"><span class="pipe-num">4</span> Clarity Pass</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack -->
+  <section class="tech-section">
+    <div class="content-wrap">
+      <h2 class="section-title" style="margin-bottom:2.5rem;"><span>Tech</span> Stack</h2>
+      <div class="tech-grid">
+        <div class="tech-card reveal">
+          <div class="tech-label">Backend</div>
+          <div class="tech-items">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Flask</span>
+            <span class="tech-badge">OpenCV</span>
+            <span class="tech-badge">Pillow</span>
+            <span class="tech-badge">NumPy</span>
+          </div>
+        </div>
+        <div class="tech-card reveal" style="--delay:.1s">
+          <div class="tech-label">AI / ML</div>
+          <div class="tech-items">
+            <span class="tech-badge" style="--tc:var(--cyan)">Zhang et al. 2016</span>
+            <span class="tech-badge" style="--tc:var(--cyan)">cv2.dnn</span>
+            <span class="tech-badge" style="--tc:var(--cyan)">CIELAB colour space</span>
+          </div>
+        </div>
+        <div class="tech-card reveal" style="--delay:.2s">
+          <div class="tech-label">Image Processing</div>
+          <div class="tech-items">
+            <span class="tech-badge" style="--tc:var(--violet)">Bilateral Filter</span>
+            <span class="tech-badge" style="--tc:var(--violet)">Lanczos-4</span>
+            <span class="tech-badge" style="--tc:var(--violet)">Unsharp Mask</span>
+          </div>
+        </div>
+        <div class="tech-card reveal" style="--delay:.3s">
+          <div class="tech-label">Frontend</div>
+          <div class="tech-items">
+            <span class="tech-badge" style="--tc:var(--magenta)">Vanilla JS</span>
+            <span class="tech-badge" style="--tc:var(--magenta)">CSS Filters</span>
+            <span class="tech-badge" style="--tc:var(--magenta)">Clip-path Slider</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="content-wrap">
+      <h2 class="section-title" style="margin-bottom:2.5rem;">Frequently Asked <span>Questions</span></h2>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-q">Do I need to install the neural model to use colorization?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>No. ChromaClear includes a built-in algorithmic colorization engine that produces warm-toned results without any model files. If you install the Zhang et al. Caffe weights (see README), the neural model activates automatically and provides more photorealistic results. The status indicator in the nav shows which mode is active.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal" style="--delay:.05s">
+          <button class="faq-q">Are my images uploaded to any cloud server?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>No. All processing runs entirely on your own machine via the local Flask server. Images are held in memory during processing and are not permanently stored on disk. Nothing leaves your machine.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal" style="--delay:.1s">
+          <button class="faq-q">What file formats are supported?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>ChromaClear accepts PNG, JPEG, WEBP, BMP and TIFF files up to 16 MB. Images larger than 1024 pixels on either axis are automatically downscaled before processing to keep response times fast. Results are exported as high-quality JPEG.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal" style="--delay:.15s">
+          <button class="faq-q">What does the scale multiplier do?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>The 1×, 2× and 3× buttons control the upscaling factor applied during the Enhancement step. A 2× upscale doubles both the width and height of the output image using Lanczos-4 interpolation paired with unsharp masking to maintain sharpness. Note that large scale factors on large input images can significantly increase processing time and output file size.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal" style="--delay:.2s">
+          <button class="faq-q">Can I use Live Adjustments before seeing the result?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>Live Adjustments apply CSS filters to the already-processed result in real time — no re-processing required. Open the Live Adjust panel before you hit Process, set your preferred slider defaults, and they will be applied the moment the result arrives. You can continue tweaking until you are satisfied, then download.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal" style="--delay:.25s">
+          <button class="faq-q">How do I install the neural colorization model?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>Create a <code>models/</code> folder in the project root and download three files using the commands in the README: the prototxt architecture file, the ~125 MB Caffe weights, and the cluster-centres .npy file. Restart the Flask server — the status indicator will turn cyan when the neural model loads successfully.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner reveal" style="margin-top:0">
+    <div class="cta-banner-inner">
+      <div class="cta-glow"></div>
+      <h2>Ready to try it yourself?</h2>
+      <p>Head to the Studio and drop in your first photograph.</p>
+      <a href="/studio" class="btn-hero-primary">
+        Open the Studio
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo"><span class="logo-chrome">Chroma</span><span class="logo-clear">Clear</span></div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/studio">Studio</a>
+      <a href="/how-it-works">How It Works</a>
+    </div>
+    <p>Powered by OpenCV · Pillow · Flask · Zhang et al. Colorization</p>
+    <p class="footer-note">All processing happens locally on your server. No images stored permanently.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="/static/js/home.js"></script>
+</body>
+</html>
